@@ -76,6 +76,7 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
+output.elasticsearch.index: "mysql-%{[agent.version]}"
 setup.template.name: "mysql-%{[agent.version]}"
 setup.template.pattern: "mysql-%{[agent.version]}"
 EOF
