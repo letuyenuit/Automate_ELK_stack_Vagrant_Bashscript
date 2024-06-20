@@ -48,9 +48,6 @@ processors:
   - add_cloud_metadata: ~
   - add_docker_metadata: ~
   - add_kubernetes_metadata: ~
-output.elasticsearch.index: "webserver-%{[agent.version]}"
-setup.template.name: "webserver-%{[agent.version]}"
-setup.template.pattern: "webserver-%{[agent.version]}"
 EOF
 )
 echo "$CONFIG_CONTENT" | sudo tee /etc/filebeat/filebeat.yml > /dev/null
@@ -70,7 +67,6 @@ sudo cat << EOF > /etc/filebeat/modules.d/nginx.yml
     enabled: true
     var.paths: ["/var/log/nginx/error.log"]
 EOF
-
 
 PASSWORD=elastic
 FINGERPRINT=$(cat /home/vagrant/authdir/fingerprint)
