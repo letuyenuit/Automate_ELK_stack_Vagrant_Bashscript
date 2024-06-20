@@ -1,0 +1,37 @@
+# ============================== Filebeat inputs ===============================
+filebeat.inputs:
+  - type: filestream
+    id: my-filestream-id
+    enabled: false
+    paths:
+      - /var/log/*.log
+# ============================== Filebeat modules ==============================
+
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  reload.enabled: false
+# ======================= Elasticsearch template setting =======================
+
+setup.template.settings:
+  index.number_of_shards: 1
+
+# ================================= Dashboards =================================
+setup.dashboards.enabled: true
+
+# =================================== Kibana ===================================
+setup.kibana:
+  host: "http://192.168.56.50:5601"
+# ---------------------------- Elasticsearch Output ----------------------------
+output.elasticsearch:
+  hosts: ["https://192.168.56.50:9200"]
+  username: "elastic"
+  password: "elastic"
+  ssl:
+    enabled: true
+    ca_trusted_fingerprint: "{{fingerprint}}"
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: forwarded
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
