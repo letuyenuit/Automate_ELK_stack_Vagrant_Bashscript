@@ -52,3 +52,5 @@ EOF
 
 sudo openssl x509 -in /etc/elasticsearch/certs/http_ca.crt -sha256 -fingerprint | grep SHA256 | sed 's/://g' | cut -d'=' -f2 > /home/vagrant/authdir/fingerprint
 
+#sudo /usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token -s kibana
+#sudo /usr/share/kibana/bin/kibana-verification-code
